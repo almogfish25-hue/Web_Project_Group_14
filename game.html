@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Famous - Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🎮</span>
+                <span class="logo-text">Guess the Famous</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="lobby.html">Lobby</a>
+                <a href="game.html">Game</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main>
+
+        <!-- Room info bar -->
+        <section class="room-info-bar">
+            <span>Room: <strong id="game-room-code">...</strong></span>
+            <span>Round: <strong id="round-number">1</strong></span>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- PHASE 1: COUNTDOWN (hidden — shown by JS when game starts)   -->
+        <!-- ============================================================ -->
+        <section id="phase-countdown" class="game-phase hidden">
+            <div class="countdown-display">
+                <span id="countdown-number">3</span>
+            </div>
+            <p class="countdown-label">Get ready!</p>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- PHASE 2: CELEBRITY REVEAL (hidden — shown for 3 seconds)     -->
+        <!-- ============================================================ -->
+        <section id="phase-reveal" class="game-phase hidden">
+            <h2>Memorize the names!</h2>
+            <p class="reveal-hint">This list will disappear in <span id="reveal-timer">3</span> seconds...</p>
+
+            <ul id="celebrity-reveal-list" class="celebrity-list">
+                <!-- Populated by JS — static examples for HTML structure -->
+                <li>Donald Trump</li>
+                <li>Michael Jordan</li>
+                <li>Barack Obama</li>
+                <li>Madonna</li>
+            </ul>
+        </section>
+
+
+        <!-- ============================================================ -->
+        <!-- PHASE 3: MAIN GAME BOARD (hidden — shown after reveal)       -->
+        <!-- ============================================================ -->
+        <section id="phase-game" class="game-phase hidden">
+
+            <h2>Game Board</h2>
+            <p class="game-instruction">
+                When you correctly guess out loud whose famous person belongs to whom —
+                tap that player's card to capture them!
+            </p>
+
+            <!-- Player Cards Grid -->
+            <!-- Each card gets a unique color class (color-1 through color-8) via JS -->
+            <!-- Clicking a card triggers the "capture" logic in JS -->
+            <div id="player-board" class="player-board">
+
+                <!-- Card structure: name + score + optional "prisoners" list -->
+
+                <div class="player-card color-1" id="card-eyal" data-player="eyal">
+                    <div class="card-header">
+                        <span class="card-name">Eyal Rotshtain</span>
+                    </div>
+                    <div class="card-score">
+                        Score: <span class="score-value">0</span>
+                    </div>
+                    <!-- Prisoners list: players captured under this player -->
+                    <ul class="prisoners-list">
+                        <!-- Populated dynamically by JS -->
+                    </ul>
+                </div>
+
+                <div class="player-card color-2" id="card-almog" data-player="almog">
+                    <div class="card-header">
+                        <span class="card-name">Almog Fishman</span>
+                    </div>
+                    <div class="card-score">
+                        Score: <span class="score-value">0</span>
+                    </div>
+                    <ul class="prisoners-list"></ul>
+                </div>
+
+                <div class="player-card color-3" id="card-chen" data-player="chen">
+                    <div class="card-header">
+                        <span class="card-name">Chen Epstein</span>
+                    </div>
+                    <div class="card-score">
+                        Score: <span class="score-value">0</span>
+                    </div>
+                    <ul class="prisoners-list"></ul>
+                </div>
+
+                <div class="player-card color-4" id="card-bar" data-player="bar">
+                    <div class="card-header">
+                        <span class="card-name">Bar Levi</span>
+                    </div>
+                    <div class="card-score">
+                        Score: <span class="score-value">0</span>
+                    </div>
+                    <ul class="prisoners-list"></ul>
+                </div>
+
+            </div>
+            <!-- end #player-board -->
+
+        </section>
+        <!-- end #phase-game -->
+
+
+        <!-- ============================================================ -->
+        <!-- PHASE 4: END GAME MODAL (hidden — shown when one color wins) -->
+        <!-- ============================================================ -->
+        <section id="phase-end" class="game-phase hidden">
+
+            <div class="end-modal">
+
+                <h2>We have a winner!</h2>
+
+                <!-- Trophy illustration -->
+                <figure>
+                    <img
+                        src="images/trophy-winner.jpg"
+                        alt="Golden trophy cup with confetti celebrating the round winner"
+                        class="winner-image"
+                    >
+                </figure>
+
+                <!-- Winner name injected by JS -->
+                <p class="winner-announcement">
+                    <strong id="winner-name">...</strong> wins this round!
+                </p>
+
+                <!-- Final Scoreboard -->
+                <div class="final-scores">
+                    <h3>Round Scores</h3>
+                    <table id="score-table">
+                        <thead>
+                            <tr>
+                                <th>Place</th>
+                                <th>Player</th>
+                                <th>Points Earned</th>
+                                <th>Total Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="score-table-body">
+                            <!-- Rows injected by JS -->
+                            <!-- Example row structure: -->
+                            <tr>
+                                <td>🥇 1st</td>
+                                <td>Eyal Rotshtain</td>
+                                <td>+5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>🥈 2nd</td>
+                                <td>Almog Fishman</td>
+                                <td>+2</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>🥉 3rd</td>
+                                <td>Chen Epstein</td>
+                                <td>+1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>—</td>
+                                <td>Bar Levi</td>
+                                <td>+0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Play Again / End -->
+                <div class="end-actions">
+                    <button id="btn-play-again" class="btn-primary">
+                        🔄 Play Again (keep scores)
+                    </button>
+                    <button id="btn-end-game" class="btn-secondary">
+                        🚪 End Game
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- end #phase-end -->
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>Guess the Famous &copy; 2026 | Team 14 | Eyal Rotstain &amp; Almog Fishman</p>
+        <p>Ben Gurion University of the Negev</p>
+    </footer>
+
+    <script src="js/game.js"></script>
+
+</body>
+
+</html>

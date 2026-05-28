@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Famous - Lobby</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🎮</span>
+                <span class="logo-text">Guess the Famous</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="lobby.html">Lobby</a>
+                <a href="game.html">Game</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main>
+
+        <!-- Room Info Banner -->
+        <section class="room-banner">
+            <p>You are in Room</p>
+            <!-- Room code will be injected by JS from URL params -->
+            <h2 id="display-room-code">...</h2>
+            <p class="room-hint">Share this code with your friends so they can join!</p>
+        </section>
+
+        <!-- Player greeting -->
+        <section class="player-greeting">
+            <!-- Player name will be injected by JS -->
+            <p>Playing as: <strong id="display-player-name">...</strong></p>
+        </section>
+
+        <!-- ---- LEFT / TOP: Submit your famous person ---- -->
+        <section class="celebrity-section">
+            <h2>Your Famous Person</h2>
+            <p>Pick a famous person — your opponents will try to guess it's you!</p>
+
+            <form id="celebrity-form">
+
+                <div class="form-group">
+                    <label for="celebrity-name">Famous Person's Name</label>
+                    <input
+                        type="text"
+                        id="celebrity-name"
+                        name="celebrityName"
+                        placeholder="e.g. Barack Obama"
+                        maxlength="50"
+                        required
+                    >
+                    <small>Must be a real, well-known person (e.g. "Barack Obama" or "Madonna"). Each name can only be used once per round.</small>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Name ✓</button>
+
+            </form>
+
+            <!-- Confirmation message — hidden until JS shows it -->
+            <div id="celebrity-confirmed" class="confirmation-msg hidden">
+                <p>✅ Your famous person has been submitted! Waiting for others...</p>
+            </div>
+
+        </section>
+
+        <!-- ---- RIGHT / BOTTOM: Waiting Players List ---- -->
+        <section class="waiting-section">
+            <h2>Players in the Room</h2>
+            <p id="player-count">Waiting for players... (<span id="count-number">0</span>/20)</p>
+
+            <!-- Decorative illustration: friends playing together -->
+            <figure>
+                <img
+                    src="images/lobby-friends.jpg"
+                    alt="Illustrated friends sitting together happily playing a board game"
+                    class="lobby-image"
+                >
+            </figure>
+
+            <ul id="players-list" class="players-list">
+                <!-- Player items will be added by JS -->
+                <!-- Static examples shown here for HTML structure reference -->
+                <li class="player-item ready">
+                    <span class="player-status-icon">✅</span>
+                    <span class="player-item-name">Eyal Rotshtain</span>
+                    <span class="player-badge">Ready</span>
+                </li>
+                <li class="player-item waiting">
+                    <span class="player-status-icon">⏳</span>
+                    <span class="player-item-name">Almog Fishman</span>
+                    <span class="player-badge">Waiting</span>
+                </li>
+                <li class="player-item waiting">
+                    <span class="player-status-icon">⏳</span>
+                    <span class="player-item-name">Chen Epstein</span>
+                    <span class="player-badge">Waiting</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Start Game Button — visible to all, controlled by JS (room host only) -->
+        <section class="start-section">
+            <button id="start-game-btn" class="btn-start" disabled>
+                Start Game 🚀
+            </button>
+            <p class="start-hint">The room host can start the game once all players are ready.</p>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>Guess the Famous &copy; 2026 | Team 14 | Eyal Rotstain &amp; Almog Fishman</p>
+        <p>Ben Gurion University of the Negev</p>
+    </footer>
+
+    <script src="js/lobby.js"></script>
+
+</body>
+
+</html>

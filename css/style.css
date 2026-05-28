@@ -1,0 +1,986 @@
+/* =========================================
+   style.css — Guess the Famous
+   Team 14: Eyal Rotshtain & Almog Fishman
+   ========================================= */
+
+
+/* =========================================
+   1. GOOGLE FONT + CSS VARIABLES
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --color-primary:    #2E3C50;
+    --color-accent:     #2ECC71;
+    --color-bg:         #F0ECF1;
+    --color-white:      #FFFFFF;
+    --color-text:       #1a1a2e;
+    --color-text-light: #6b7280;
+    --color-border:     #d1d5db;
+    --color-shadow:     rgba(0, 0, 0, 0.12);
+
+    --radius-sm:  6px;
+    --radius-md:  12px;
+    --radius-lg:  20px;
+
+    --transition: 0.25s ease;
+}
+
+
+/* =========================================
+   2. RESET & BASE
+   ========================================= */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+h1 { font-size: 2.2rem; font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 600; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* =========================================
+   3. UTILITY CLASSES
+   ========================================= */
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/* =========================================
+   4. HEADER & NAV
+   ========================================= */
+
+header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0 32px;
+    box-shadow: 0 2px 8px var(--color-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+nav a:hover {
+    color: var(--color-white);
+    border-bottom-color: var(--color-accent);
+}
+
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+
+footer {
+    background-color: var(--color-primary);
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    padding: 20px 24px;
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   6. BUTTONS
+   ========================================= */
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 32px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    background-color: var(--color-border);
+    color: var(--color-text-light);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 11px 28px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+
+/* =========================================
+   7. FORMS
+   ========================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.form-group input,
+.form-group textarea {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    padding: 11px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.18);
+}
+
+.form-group small {
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+}
+
+
+/* =========================================
+   8. INDEX PAGE — Join Room
+   ========================================= */
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 60px 0 40px;
+}
+
+.hero h1 {
+    color: var(--color-primary);
+    margin-bottom: 14px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* How It Works */
+.how-it-works {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 32px 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.how-it-works h2 {
+    margin-bottom: 18px;
+    color: var(--color-primary);
+}
+
+.how-it-works ol {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.how-it-works ol li {
+    flex: 1;
+    min-width: 180px;
+    background-color: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-size: 0.92rem;
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 44px;
+}
+
+.how-it-works ol {
+    counter-reset: step-counter;
+}
+
+.how-it-works ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-accent);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Join Form Card */
+.join-section {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px var(--color-shadow);
+}
+
+.join-section h2 {
+    color: var(--color-primary);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.join-section .btn-primary {
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   9. LOBBY PAGE
+   ========================================= */
+
+/* Room Banner */
+.room-banner {
+    text-align: center;
+    padding: 28px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+}
+
+.room-banner p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.room-banner h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+}
+
+.room-hint {
+    font-size: 0.82rem;
+    opacity: 0.65;
+}
+
+/* Player Greeting */
+.player-greeting {
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 1rem;
+    color: var(--color-text-light);
+}
+
+.player-greeting strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Celebrity Form */
+.celebrity-section {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.celebrity-section h2 {
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.celebrity-section > p {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.celebrity-section .btn-primary {
+    margin-top: 4px;
+}
+
+/* Confirmation message */
+.confirmation-msg {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: rgba(46, 204, 113, 0.12);
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    color: #1a7a45;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Waiting Players List */
+.waiting-section {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.waiting-section h2 {
+    color: var(--color-primary);
+    margin-bottom: 6px;
+}
+
+#player-count {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 16px;
+}
+
+.lobby-image {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-md);
+}
+
+.waiting-section figure {
+    margin-bottom: 28px;
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg);
+    font-size: 0.95rem;
+}
+
+.player-item.ready {
+    border-left: 4px solid var(--color-accent);
+}
+
+.player-item.waiting {
+    border-left: 4px solid var(--color-border);
+}
+
+.player-status-icon {
+    font-size: 1rem;
+}
+
+.player-item-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.player-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background-color: var(--color-white);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+}
+
+.player-item.ready .player-badge {
+    color: #1a7a45;
+    border-color: var(--color-accent);
+}
+
+/* Start Game Button */
+.start-section {
+    text-align: center;
+    padding: 16px 0 8px;
+}
+
+.btn-start {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 16px 56px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.btn-start:not(:disabled):hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.btn-start:disabled {
+    background-color: var(--color-border);
+    color: var(--color-text-light);
+    cursor: not-allowed;
+}
+
+/* Start button pulse animation (applied by JS when enabled) */
+.btn-start.pulse {
+    animation: pulse 1.6s infinite;
+}
+
+.start-hint {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+}
+
+
+/* =========================================
+   10. GAME PAGE
+   ========================================= */
+
+/* Room Info Bar */
+.room-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+}
+
+.room-info-bar strong {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+}
+
+/* Shared game phase wrapper */
+.game-phase {
+    text-align: center;
+}
+
+
+/* --- PHASE 1: Countdown --- */
+#phase-countdown {
+    padding: 80px 0;
+}
+
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#countdown-number {
+    font-size: 10rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    /* Animation applied by JS */
+    animation: countdownPop 0.8s ease forwards;
+}
+
+.countdown-label {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    margin-top: 16px;
+}
+
+
+/* --- PHASE 2: Celebrity Reveal --- */
+#phase-reveal {
+    padding: 40px 0;
+}
+
+#phase-reveal h2 {
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.reveal-hint {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+.celebrity-list {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    min-width: 280px;
+}
+
+.celebrity-list li {
+    background-color: var(--color-white);
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px var(--color-shadow);
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+/* Staggered delay for each list item */
+.celebrity-list li:nth-child(1)  { animation-delay: 0.05s; }
+.celebrity-list li:nth-child(2)  { animation-delay: 0.10s; }
+.celebrity-list li:nth-child(3)  { animation-delay: 0.15s; }
+.celebrity-list li:nth-child(4)  { animation-delay: 0.20s; }
+.celebrity-list li:nth-child(5)  { animation-delay: 0.25s; }
+.celebrity-list li:nth-child(6)  { animation-delay: 0.30s; }
+.celebrity-list li:nth-child(7)  { animation-delay: 0.35s; }
+.celebrity-list li:nth-child(8)  { animation-delay: 0.40s; }
+.celebrity-list li:nth-child(9)  { animation-delay: 0.45s; }
+.celebrity-list li:nth-child(10) { animation-delay: 0.50s; }
+.celebrity-list li:nth-child(11) { animation-delay: 0.55s; }
+.celebrity-list li:nth-child(12) { animation-delay: 0.60s; }
+.celebrity-list li:nth-child(13) { animation-delay: 0.65s; }
+.celebrity-list li:nth-child(14) { animation-delay: 0.70s; }
+.celebrity-list li:nth-child(15) { animation-delay: 0.75s; }
+.celebrity-list li:nth-child(16) { animation-delay: 0.80s; }
+.celebrity-list li:nth-child(17) { animation-delay: 0.85s; }
+.celebrity-list li:nth-child(18) { animation-delay: 0.90s; }
+.celebrity-list li:nth-child(19) { animation-delay: 0.95s; }
+.celebrity-list li:nth-child(20) { animation-delay: 1.00s; }
+
+
+/* --- PHASE 3: Game Board --- */
+#phase-game {
+    text-align: left;
+}
+
+#phase-game h2 {
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.game-instruction {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+/* 4-column grid */
+.player-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+/* Player Card */
+.player-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 20px 16px;
+    box-shadow: 0 3px 12px var(--color-shadow);
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    border-top: 5px solid var(--color-border);
+    /* Entrance animation */
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.player-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+/* Staggered entrance for cards */
+.player-card:nth-child(1)  { animation-delay: 0.05s; }
+.player-card:nth-child(2)  { animation-delay: 0.10s; }
+.player-card:nth-child(3)  { animation-delay: 0.15s; }
+.player-card:nth-child(4)  { animation-delay: 0.20s; }
+.player-card:nth-child(5)  { animation-delay: 0.25s; }
+.player-card:nth-child(6)  { animation-delay: 0.30s; }
+.player-card:nth-child(7)  { animation-delay: 0.35s; }
+.player-card:nth-child(8)  { animation-delay: 0.40s; }
+.player-card:nth-child(9)  { animation-delay: 0.45s; }
+.player-card:nth-child(10) { animation-delay: 0.50s; }
+.player-card:nth-child(11) { animation-delay: 0.55s; }
+.player-card:nth-child(12) { animation-delay: 0.60s; }
+.player-card:nth-child(13) { animation-delay: 0.65s; }
+.player-card:nth-child(14) { animation-delay: 0.70s; }
+.player-card:nth-child(15) { animation-delay: 0.75s; }
+.player-card:nth-child(16) { animation-delay: 0.80s; }
+.player-card:nth-child(17) { animation-delay: 0.85s; }
+.player-card:nth-child(18) { animation-delay: 0.90s; }
+.player-card:nth-child(19) { animation-delay: 0.95s; }
+.player-card:nth-child(20) { animation-delay: 1.00s; }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.card-score {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+}
+
+.card-score span {
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.prisoners-list {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.prisoners-list li {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    padding: 2px 8px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
+}
+
+
+/* --- 20 Player Card Colors (bold pastel backgrounds) --- */
+.color-1  { border-top-color: #C62828; background-color: #FFCDD2; }
+.color-2  { border-top-color: #1565C0; background-color: #BBDEFB; }
+.color-3  { border-top-color: #6A1B9A; background-color: #E1BEE7; }
+.color-4  { border-top-color: #E65100; background-color: #FFE0B2; }
+.color-5  { border-top-color: #00695C; background-color: #B2DFDB; }
+.color-6  { border-top-color: #AD1457; background-color: #F8BBD0; }
+.color-7  { border-top-color: #BF360C; background-color: #FFCCBC; }
+.color-8  { border-top-color: #37474F; background-color: #CFD8DC; }
+.color-9  { border-top-color: #006064; background-color: #B2EBF2; }
+.color-10 { border-top-color: #2E7D32; background-color: #C8E6C9; }
+.color-11 { border-top-color: #F57F17; background-color: #FFF9C4; }
+.color-12 { border-top-color: #4527A0; background-color: #D1C4E9; }
+.color-13 { border-top-color: #D84315; background-color: #FBCCB8; }
+.color-14 { border-top-color: #1A5276; background-color: #AED6F1; }
+.color-15 { border-top-color: #558B2F; background-color: #DCEDC8; }
+.color-16 { border-top-color: #5D4037; background-color: #D7CCC8; }
+.color-17 { border-top-color: #0277BD; background-color: #B3E5FC; }
+.color-18 { border-top-color: #880E4F; background-color: #FCE4EC; }
+.color-19 { border-top-color: #1B5E20; background-color: #A5D6A7; }
+.color-20 { border-top-color: #A04000; background-color: #FAD7A0; }
+
+
+/* --- PHASE 4: End Game Modal --- */
+#phase-end {
+    padding: 40px 0;
+}
+
+.end-modal {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 640px;
+    margin: 0 auto;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.end-modal h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+}
+
+.winner-announcement {
+    font-size: 1.15rem;
+    margin-bottom: 32px;
+    color: var(--color-text-light);
+}
+
+.winner-announcement strong {
+    color: var(--color-accent);
+    font-size: 1.3rem;
+}
+
+/* Score Table */
+.final-scores h3 {
+    color: var(--color-primary);
+    margin-bottom: 14px;
+}
+
+#score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    margin-bottom: 32px;
+}
+
+#score-table thead {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+#score-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+}
+
+#score-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Alternating row stripes */
+#score-table tbody tr:nth-child(even) {
+    background-color: var(--color-bg);
+}
+
+#score-table tbody tr:hover {
+    background-color: rgba(46, 204, 113, 0.08);
+}
+
+/* End Actions Buttons */
+.end-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* =========================================
+   11. DYNAMIC JS ELEMENTS
+   ========================================= */
+
+/* Error messages added by JS under form fields */
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* Red border on invalid inputs */
+.input-error {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15) !important;
+}
+
+/* "You" badge on current player's card */
+.you-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+}
+
+/* Winning row highlight in score table */
+.winner-row {
+    background-color: rgba(46, 204, 113, 0.12) !important;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   12. IMAGES & ILLUSTRATIONS
+   ========================================= */
+
+/* Hero illustration — index page */
+.hero-image {
+    display: block;
+    margin: 24px auto 0;
+    max-width: 420px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+}
+
+/* Lobby decorative illustration */
+.lobby-image {
+    display: block;
+    margin: 20px auto 0;
+    max-width: 300px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    opacity: 0.92;
+}
+
+/* Winner trophy image — end modal */
+.winner-image {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 200px;
+    width: 100%;
+}
+
+/* Attribution line under images */
+.image-credit {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: 6px;
+}
+
+.image-credit a {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   13. ANIMATIONS
+   ========================================= */
+
+/* Countdown number pop */
+@keyframes countdownPop {
+    0%   { transform: scale(0.5); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+}
+
+/* Slide up + fade in — used for cards and list items */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse — used for Start Game button */
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
