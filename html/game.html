@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Famous - Game</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -75,11 +75,7 @@
             </p>
 
             <!-- Player Cards Grid -->
-            <!-- Each card gets a unique color class (color-1 through color-8) via JS -->
-            <!-- Clicking a card triggers the "capture" logic in JS -->
             <div id="player-board" class="player-board">
-
-                <!-- Card structure: name + score + optional "prisoners" list -->
 
                 <div class="player-card color-1" id="card-eyal" data-player="eyal">
                     <div class="card-header">
@@ -88,10 +84,7 @@
                     <div class="card-score">
                         Score: <span class="score-value">0</span>
                     </div>
-                    <!-- Prisoners list: players captured under this player -->
-                    <ul class="prisoners-list">
-                        <!-- Populated dynamically by JS -->
-                    </ul>
+                    <ul class="prisoners-list"></ul>
                 </div>
 
                 <div class="player-card color-2" id="card-almog" data-player="almog">
@@ -143,7 +136,7 @@
                 <!-- Trophy illustration -->
                 <figure>
                     <img
-                        src="images/trophy-winner.jpg"
+                        src="../images/trophy-winner.jpg"
                         alt="Golden trophy cup with confetti celebrating the round winner"
                         class="winner-image"
                     >
@@ -167,8 +160,6 @@
                             </tr>
                         </thead>
                         <tbody id="score-table-body">
-                            <!-- Rows injected by JS -->
-                            <!-- Example row structure: -->
                             <tr>
                                 <td>🥇 1st</td>
                                 <td>Eyal Rotshtain</td>
@@ -220,7 +211,7 @@
         <p>Ben Gurion University of the Negev</p>
     </footer>
 
-    <script src="js/game.js"></script>
+    <script src="../js/game.js"></script>
 
 </body>
 
